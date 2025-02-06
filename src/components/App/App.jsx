@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import SearchBar from '../SearchBar/SearchBar'
 import ImageGallery from '../ImageGallery/ImageGallery'
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import getPhotos from '../../unsplash-api'
 import './App.css'
 
@@ -10,7 +11,7 @@ function App() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState("");
+  const [error, setError] = useState("");
   const [page, setPage] = useState(1);
   const [showLoadMore, setShowLoadMore] = useState(false);
   const [images, setImages] = useState([]);
@@ -27,16 +28,15 @@ useEffect(() =>{
   async function fetchData() {
     try {
       setIsLoading(true);
-      // setError("");
+      setError("");
       const { results, totalPages } = await getPhotos(searchQuery, page);
       if (results.length === 0) {
-        // setError("There are no images matching your query");
-        throw new Error("omg error!");
+        setError("There are no images matching your query");
       }
       setImages((prevImages) => [...prevImages, ...results]);
       setShowLoadMore(totalPages > 1 && page !== totalPages);
     } catch (error) {
-      // setError(error.message);
+      setError(error.message);
       console.log(error)
     } finally {
       setIsLoading(false);
@@ -58,8 +58,7 @@ function handleSearch(searchString) {
   return (
     <>
       <SearchBar onSearch={handleSearch} />
-{/* 
-      <SearchBar  OnSearch ={SearchBar}/> */}
+      {error && <ErrorMessage error={error} />}
       {images.length > 0 && (
       //   <ImageGallery images={images} onClick={openModal}></ImageGallery>
       // )}
