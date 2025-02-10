@@ -1,6 +1,33 @@
+import ReactModal from 'react-modal';
 
-// Компонент ImageModal повинен рендеритися всередині компоненту App та отримувати через пропси з App всі необхідні дані та функції.
+// // Під час натискання на зображення галереї повинно відкриватися модальне вікно ImageModal з темним фоном, яке відображатиме зображення у великому форматі. 
+
+export default function ImageModal ({modalParams, onClose}) {
+    const customStyles = {
+        content: {
+          top: '50%',
+          left: '50%',
+          right: 'auto',
+          bottom: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+        },
+      };
+    return(
+        <ReactModal
+          style={customStyles}
+        isOpen={modalParams.isOpen}
+        shouldCloseOnEsc={true}
+        shouldCloseOnOverlayClick={true}
+        // ariaHideApp={false}
+        onRequestClose={onClose}
+        >
+        <img src={modalParams.url} alt ={modalParams.alt} width = "100%"/>
+ 
+        </ReactModal>
+      );
+
+}
 
 
 
-// Під час натискання на зображення галереї повинно відкриватися модальне вікно ImageModal з темним фоном, яке відображатиме зображення у великому форматі. Модальне вікно має бути налаштовано таким чином, щоб воно закривалося при натисканні на клавішу ESC або при кліку за його межами. Для реалізації функціональності модального вікна використовуй бібліотеку React Modal.
