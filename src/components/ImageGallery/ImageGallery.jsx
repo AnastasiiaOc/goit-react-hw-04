@@ -1,4 +1,5 @@
 import ImageCard from "../ImageCard/ImageCard";
+import css from "../ImageGallery/ImageGallery.module.css";
 
 export default function ImageGallery({images, onClick}) {
 
@@ -6,7 +7,7 @@ return (<ul>
 	{/* Набір елементів списку із зображеннями */}
 	{images.map((image)=>{
 		return (
-		<li key = {image.id}>
+		<li key = {image.id} className={css.gallery}>
 		<ImageCard image={image} onClick={onClick} />
           </li>
         );

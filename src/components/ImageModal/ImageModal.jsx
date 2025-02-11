@@ -1,4 +1,5 @@
 import ReactModal from 'react-modal';
+import css from "./ImageModal.module.css"
 
 // // Під час натискання на зображення галереї повинно відкриватися модальне вікно ImageModal з темним фоном, яке відображатиме зображення у великому форматі. 
 
@@ -11,18 +12,21 @@ export default function ImageModal ({modalParams, onClose}) {
           bottom: 'auto',
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
-        },
+          overflow:'hidden',
+
+        }
       };
     return(
         <ReactModal
-          style={customStyles}
+        style={customStyles}
+        overlayClassName={css.backdrop}
         isOpen={modalParams.isOpen}
         shouldCloseOnEsc={true}
         shouldCloseOnOverlayClick={true}
-        // ariaHideApp={false}
+        ariaHideApp={false}
         onRequestClose={onClose}
         >
-        <img src={modalParams.url} alt ={modalParams.alt} width = "100%"/>
+        <img className={css.image} src={modalParams.url} alt ={modalParams.alt} width = "100%"/>
  
         </ReactModal>
       );

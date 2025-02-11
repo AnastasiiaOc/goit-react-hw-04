@@ -78,15 +78,11 @@ function closeModal() {
     <>
 
       <SearchBar onSearch={handleSearch} />
-
       {error && <ErrorMessage error={error} />}
       {images.length > 0 && (
         <ImageGallery images={images} onClick={openModal}></ImageGallery>
       )}
-    
      {isLoading && <Loader />}
-     {/* {images.length > 0 && !isLoading && showLoadMore && <LoadMoreBtn onClick={handleLoadMore}/>} */}
-
      {images.length > 0 && !isLoading && showLoadMore && (
         <LoadMoreBtn onClick={handleLoadMore} />
       )}
