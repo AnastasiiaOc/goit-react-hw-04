@@ -3,11 +3,11 @@ import css from "../ImageGallery/ImageGallery.module.css";
 
 export default function ImageGallery({images, onClick}) {
 
-return (<ul>
+return (<ul className={css.gallery}>
 	{/* Набір елементів списку із зображеннями */}
 	{images.map((image)=>{
 		return (
-		<li key = {image.id} className={css.gallery}>
+		<li key = {image.id} className={css.galleryItem}>
 		<ImageCard image={image} onClick={onClick} />
           </li>
         );

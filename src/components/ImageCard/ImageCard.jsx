@@ -18,10 +18,10 @@ export default function ImageCard({ image, onClick }) {
         alt={image.alt_description}
         onClick={() => onClick(image)}
       />
-      <ul >
+      {/* <ul >
         <li >By {image.user.name}</li>
         <li >❤️ {image.likes}</li>
-      </ul>
+      </ul> */}
     </div>
   );
 }
