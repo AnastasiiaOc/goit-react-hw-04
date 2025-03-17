@@ -2,6 +2,7 @@
 import toast, { Toaster } from "react-hot-toast";
 import css from "./SearchBar.module.css";
 
+
 export default function SearchBar({ onSearch }) {
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -31,3 +32,40 @@ export default function SearchBar({ onSearch }) {
     </header>
   );
 }
+
+
+// ==========formik===================
+// import {Field, Form, Formik} from 'formik'
+
+// export default function SearchBar ({onSearch}){
+
+//   return (
+
+//  <Formik 
+
+//   initialValues={{
+//     topic:"",}}
+//     onSubmit ={(values, actions) => {
+//       onSearch(values.topic)
+//       actions.resetForm()
+//     }}>
+//       <Form className ={css.searchBar}>
+//       <Field className ={css.input}
+//       type="text"
+//       autoComplete="off"
+//       autoFocus
+//       placeholder="Search images and photos"
+//       name = "topic"
+//     />
+//     <button type="submit" className={css.searchBarButton}>Search</button>
+//     <Toaster />
+
+//       </Form>
+    
+//   </Formik>
+
+  
+ 
+//   );
+// }
+

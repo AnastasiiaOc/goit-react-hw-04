@@ -14,7 +14,7 @@ function App() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [showLoadMore, setShowLoadMore] = useState(false);
   const [images, setImages] = useState([]);
@@ -23,6 +23,8 @@ function App() {
     url: "",
     alt: "",
   });
+
+
 useEffect(() =>{
 
   if (searchQuery === ""){
@@ -31,18 +33,21 @@ useEffect(() =>{
   async function fetchData() {
     try {
       setIsLoading(true);
-      setError("");
-      const { results, totalPages } = await getPhotos(searchQuery, page);
+      setError(false);
+      const { results, totalPages } = await getPhotos(searchQuery, page); // from API
+      console.log({results})
       if (results.length === 0) {
         setError("There are no images matching your query");
       }
       setImages((prevImages) => [...prevImages, ...results]);
       setShowLoadMore(totalPages > 1 && page !== totalPages);
     
-    } catch (error) {
+ } 
+catch (error) {
       setError(error.message);
-      console.log(error)
-    } finally {
+     
+    }
+     finally {
       setIsLoading(false);
     }
   }
@@ -51,8 +56,8 @@ useEffect(() =>{
 }, [searchQuery, page]);
 
 
-function handleSearch(searchString) {
-  setSearchQuery(searchString);
+function handleSearch(topic) {
+  setSearchQuery(topic);
   setPage(1);
   setImages([]);
 }
@@ -77,7 +82,7 @@ function closeModal() {
   return (
     <>
 
-      <SearchBar onSearch={handleSearch} />
+<SearchBar onSearch={handleSearch} />
       {error && <ErrorMessage error={error} />}
       {images.length > 0 && (
         <ImageGallery images={images} onClick={openModal}></ImageGallery>
@@ -87,20 +92,17 @@ function closeModal() {
         <LoadMoreBtn onClick={handleLoadMore} />
       )}
 
-{modalParams.isOpen && (
-        <ImageModal modalParams={modalParams} onClose={closeModal} />
-      )}
-    
-    
-    </>
+ {modalParams.isOpen && (<ImageModal modalParams={modalParams} onClose={closeModal} /> )} 
+      
+  </>
   )
 }
 
-export default App
+export default App;
 
 
 
 // ================================================================
 
 
-
+ 
